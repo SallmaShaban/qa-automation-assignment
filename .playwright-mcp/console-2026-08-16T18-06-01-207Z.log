@@ -1,0 +1,10 @@
+[   11749ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2 @ https://www.saucedemo.com/:0
+[   11751ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2 @ https://www.saucedemo.com/:0
+[   11751ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2 @ https://www.saucedemo.com/:0
+[   11850ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://www.saucedemo.com/:0
+[   14881ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/unique-events/submit?universe=UNIVERSE&token=TOKEN:0
+[   14882ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/summed-events/submit?universe=UNIVERSE&token=TOKEN:0
+[   24885ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/unique-events/submit?universe=UNIVERSE&token=TOKEN:0
+[   24885ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/summed-events/submit?universe=UNIVERSE&token=TOKEN:0
+[   44888ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/unique-events/submit?universe=UNIVERSE&token=TOKEN:0
+[   44888ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ https://events.backtrace.io/api/summed-events/submit?universe=UNIVERSE&token=TOKEN:0

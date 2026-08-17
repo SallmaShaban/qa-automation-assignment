@@ -1,0 +1,33 @@
+{
+  "name": "qa-automation-assignment",
+  "version": "1.0.0",
+  "description": "Mid-level QA automation engineer assignment - UI and API testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "api:test": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json --reporters cli,html",
+    "api:test:html": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json -r html",
+    "lint": "eslint . --ext .ts,.js",
+    "clean": "rm -rf test-results/ playwright-report/"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "qa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "typescript": "^5.5.4",
+    "newman": "^6.1.1",
+    "newman-reporter-html": "^1.0.5"
+  }
+}

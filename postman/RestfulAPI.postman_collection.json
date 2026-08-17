@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "saucedemo-api-test-collection",
+    "name": "Restful API Test Collection",
+    "description": "API testing collection for restful-api.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST - Create Object",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response has id field', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "});",
+              "",
+              "pm.test('Response has name field', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('name');",
+              "});",
+              "",
+              "// Save object ID for subsequent tests",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set('objectId', jsonData.id);",
+              "pm.environment.set('objectName', jsonData.name);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Test Object\",\"data\":{\"year\":2024,\"price\":999.99,\"CPU model\":\"Intel Core i9\"}}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/objects",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET - Retrieve Created Object",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Object ID matches created object', function () {",
+              "    var jsonData = pm.response.json();",
+              "    var expectedId = pm.environment.get('objectId');",
+              "    pm.expect(jsonData.id).to.equal(expectedId);",
+              "});",
+              "",
+              "pm.test('Object name matches created name', function () {",
+              "    var jsonData = pm.response.json();",
+              "    var expectedName = pm.environment.get('objectName');",
+              "    pm.expect(jsonData.name).to.equal(expectedName);",
+              "});",
+              "",
+              "pm.test('Response contains data object', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('data');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/objects/{{objectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects",
+            "{{objectId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "PUT - Update Object Property",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Object name is updated correctly', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.name).to.equal('Updated Test Object');",
+              "});",
+              "",
+              "pm.test('Object ID remains the same', function () {",
+              "    var jsonData = pm.response.json();",
+              "    var expectedId = pm.environment.get('objectId');",
+              "    pm.expect(jsonData.id).to.equal(expectedId);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Updated Test Object\"}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/objects/{{objectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects",
+            "{{objectId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "DELETE - Delete Object",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/objects/{{objectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects",
+            "{{objectId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET - Verify Deleted Object",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Deleted object returns 404 error', function () {",
+              "    // After deletion, attempting to retrieve should return an error",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/objects/{{objectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects",
+            "{{objectId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET - Negative Test: Invalid Object ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Invalid object ID returns error', function () {",
+              "    // Requesting a non-existent object should return 404",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test('Error response contains error message', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('error');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/objects/invalid-id-12345",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "objects",
+            "invalid-id-12345"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.restful-api.dev",
+      "type": "string"
+    },
+    {
+      "key": "objectId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "objectName",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
