@@ -138,7 +138,7 @@ test.describe('Additional Edge Case Tests', () => {
     await expect(cartBadge).toHaveText('1');
 
     // Step 2: Click menu and logout
-    const menuButton = page.locator('button.bm-burger-button');
+    const menuButton = page.locator('#react-burger-menu-btn');
     await menuButton.click();
     
     const logoutLink = page.locator('a#logout_sidebar_link');

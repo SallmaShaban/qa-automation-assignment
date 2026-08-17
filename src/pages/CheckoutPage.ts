@@ -25,7 +25,7 @@ export class CheckoutPage extends BasePage {
   constructor(page: Page) {
     super(page);
     // Checkout Step One
-    this.checkoutStepOne = page.locator('[data-test="checkout-steps-one"]');
+    this.checkoutStepOne = page.locator('.checkout_info');
     this.firstNameInput = page.locator('[data-test="firstName"]');
     this.lastNameInput = page.locator('[data-test="lastName"]');
     this.postalCodeInput = page.locator('[data-test="postalCode"]');
@@ -33,7 +33,7 @@ export class CheckoutPage extends BasePage {
     this.errorMessage = page.locator('[data-test="error"]');
 
     // Checkout Step Two
-    this.checkoutStepTwo = page.locator('[data-test="checkout-steps-two"]');
+    this.checkoutStepTwo = page.locator('.checkout_summary_container');
     this.finishButton = page.locator('[data-test="finish"]');
 
     // Order Confirmation

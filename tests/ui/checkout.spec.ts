@@ -47,7 +47,7 @@ test.describe('Checkout Flow Tests', () => {
     await page.waitForURL(/.*checkout-step-one/);
     
     // Wait for checkout form to be visible
-    const checkoutForm = page.locator('[data-test="checkout-steps-one"]');
+    const checkoutForm = page.locator('.checkout_info');
     await expect(checkoutForm).toBeVisible();
 
     // Step 4: Fill checkout information
@@ -71,7 +71,7 @@ test.describe('Checkout Flow Tests', () => {
     
     // Verify Checkout Step 2 is displayed
     await page.waitForURL(/.*checkout-step-two/);
-    const checkoutStepTwo = page.locator('[data-test="checkout-steps-two"]');
+    const checkoutStepTwo = page.locator('.checkout_summary_container');
     await expect(checkoutStepTwo).toBeVisible();
     
     // Verify items are displayed in summary
@@ -120,7 +120,7 @@ test.describe('Checkout Flow Tests', () => {
     
     // Verify Checkout Step 1 is displayed
     await page.waitForURL(/.*checkout-step-one/);
-    const checkoutForm = page.locator('[data-test="checkout-steps-one"]');
+    const checkoutForm = page.locator('.checkout_info');
     await expect(checkoutForm).toBeVisible();
 
     // Step 3: Leave all fields blank and click Continue
