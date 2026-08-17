@@ -2,6 +2,8 @@
 
 A comprehensive automation project demonstrating UI testing with Playwright and API testing with Postman/Newman for a mid-level QA automation engineer role.
 
+Repository: [SallmaShaban/qa-automation-assignment](https://github.com/SallmaShaban/qa-automation-assignment)
+
 ## Project Structure
 
 ```
@@ -25,6 +27,8 @@ A comprehensive automation project demonstrating UI testing with Playwright and 
 ├── postman/
 │   ├── RestfulAPI.postman_collection.json # API test collection
 │   └── RestfulAPI.postman_environment.json # Environment variables
+├── newman/
+│   └── newman-report.html   # Generated API test report
 ├── playwright.config.ts      # Playwright configuration
 ├── package.json             # Project dependencies
 ├── README.md               # This file
@@ -204,7 +208,7 @@ The project uses the Page Object Model (POM) pattern for maintainability and reu
 ## Reports
 
 - **Playwright HTML Report**: Generated in `playwright-report/` directory
-- **Newman Report**: Generated in `test-results/` directory after API test run
+- **Newman Report**: Generated at `newman/newman-report.html` after running `npm run api:test`
 
 Open reports with:
 ```bash

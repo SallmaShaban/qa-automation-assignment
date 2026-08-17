@@ -9,8 +9,8 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "api:test": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json --reporters cli,html",
-    "api:test:html": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json -r html",
+    "api:test": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json --reporters cli,html --reporter-html-export newman/newman-report.html",
+    "api:test:html": "newman run postman/RestfulAPI.postman_collection.json -e postman/RestfulAPI.postman_environment.json --reporters html --reporter-html-export newman/newman-report.html",
     "lint": "eslint . --ext .ts,.js",
     "clean": "rm -rf test-results/ playwright-report/"
   },
