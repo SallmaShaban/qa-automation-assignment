@@ -1,5 +1,4 @@
 // spec: specs/SAUCE_DEMO_TEST_PLAN.md
-// seed: tests/ui/seed.spec.ts
 
 import { test, expect, Page } from '@playwright/test';
 import { CREDENTIALS } from '../../src/config/config';
@@ -45,6 +44,7 @@ test.describe('Checkout Flow Tests', () => {
     
     // Verify Checkout Step 1 is displayed
     await page.waitForURL(/.*checkout-step-one/);
+    await expect(page.locator('.title')).toHaveText('Checkout: Your Information');
     
     // Wait for checkout form to be visible
     const checkoutForm = page.locator('.checkout_info');
@@ -71,6 +71,7 @@ test.describe('Checkout Flow Tests', () => {
     
     // Verify Checkout Step 2 is displayed
     await page.waitForURL(/.*checkout-step-two/);
+    await expect(page.locator('.title')).toHaveText('Checkout: Overview');
     const checkoutStepTwo = page.locator('.checkout_summary_container');
     await expect(checkoutStepTwo).toBeVisible();
     
@@ -78,9 +79,15 @@ test.describe('Checkout Flow Tests', () => {
     const summaryItems = page.locator('.cart_item');
     await expect(summaryItems).toHaveCount(2);
     
-    // Verify first item contains Backpack
-    const firstItemName = summaryItems.first().locator('.inventory_item_name');
-    await expect(firstItemName).toContainText('Sauce Labs Backpack');
+    // Verify item names and prices in summary
+    const itemNames = page.locator('.inventory_item_name');
+    await expect(itemNames.nth(0)).toContainText('Sauce Labs Backpack');
+    await expect(itemNames.nth(1)).toContainText('Sauce Labs Bike Light');
+
+    // Verify subtotal, tax, and total summary
+    await expect(page.locator('.summary_subtotal_label')).toContainText('Item total: $39.98');
+    await expect(page.locator('.summary_tax_label')).toBeVisible();
+    await expect(page.locator('.summary_total_label')).toBeVisible();
 
     // Step 6: Click Finish button
     const finishButton = page.locator('[data-test="finish"]');
@@ -88,15 +95,15 @@ test.describe('Checkout Flow Tests', () => {
     
     // Verify Order Confirmation page
     await page.waitForURL(/.*checkout-complete/);
+    await expect(page.locator('.title')).toHaveText('Checkout: Complete!');
     const confirmationContainer = page.locator('.checkout_complete_container');
     await expect(confirmationContainer).toBeVisible();
     
-    // Verify thank you message
+    // Verify thank you message and Back Home button
     const thankYouMsg = page.locator('.complete-header');
     await expect(thankYouMsg).toBeVisible();
-    const msgText = await thankYouMsg.textContent();
-    expect(msgText).toBeTruthy();
-    expect(msgText).toContain('Thank you');
+    await expect(thankYouMsg).toContainText('Thank you for your order!');
+    await expect(page.locator('[data-test="back-to-products"]')).toBeVisible();
   });
 
   test('TC007: Validate error when leaving checkout fields blank', async ({ page }) => {
@@ -132,9 +139,7 @@ test.describe('Checkout Flow Tests', () => {
     await expect(errorMessage).toBeVisible();
     
     // Step 4: Verify error message is displayed
-    const errorText = await errorMessage.textContent();
-    expect(errorText).toBeTruthy();
-    expect(errorText?.toLowerCase()).toContain('required');
+    await expect(errorMessage).toContainText('Error: First Name is required');
     
     // Verify user is still on checkout step one
     expect(page.url()).toContain('checkout-step-one');
