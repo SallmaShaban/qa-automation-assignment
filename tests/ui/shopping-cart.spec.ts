@@ -65,7 +65,7 @@ test.describe('Shopping Cart Tests', () => {
     
     await page.waitForURL(/.*cart/);
     
-    const cartContainer = page.locator('.cart_container');
+    const cartContainer = page.locator('.cart_contents_container');
     await expect(cartContainer).toBeVisible();
     await expect(page.locator('.title')).toHaveText('Your Cart');
     
